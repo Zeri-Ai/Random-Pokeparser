@@ -2,7 +2,8 @@
 #include <string>
 #include "LogParser.h"
 #include "Util.h"
-const std::regex Parser::pokemon_evolution{ R"((.+?) now evolves into (?:(?:(.+?), )*(.+?) and )*(.+?)$)" };
+const std::regex Parser::pokemon_evolution{ R"((.+?) now evolves into ((?:.+?, )*)(?:(.+?)? and )?(.+?)$)" };
+//const std::regex Parser::pokemon_evolution{ R"((.+?) now evolves into (?:(.+?), )*(?:(.+?)? and )?(.+?)$)" };
 const std::string Parser::type_pokemon_evolution{ "--Randomized Evolutions--" };
 Parser::Parser(StringType current_string_type): m_current_string_type{current_string_type}
 {
@@ -14,22 +15,32 @@ bool Parser::current_type_parsable(const std::string& line)
 	case StringType::none:
 		return false;
 	case StringType::randomized_evolutions:
-		std::ostringstream str_stream;
+		std::stringstream str_stream;
 		std::smatch sm;
 		if (!std::regex_match(line, sm, pokemon_evolution))
 		{
-			std::ostringstream str_stream;
 			str_stream << "line: \"" << line << "\" is not a randomized evolution.";
 			Logger::trace(str_stream.str());
 			return false;
 		}
-		str_stream << "Evolution -> " << sm[1] << " evolves into -> ";
-		for (unsigned i=2; i<sm.size(); ++i)
+		for (unsigned i = 1; i < sm.size(); ++i)
 		{
-			str_stream << sm[i] << " ";
+			if (i == 2)
+			{
+				str_stream << utilities::replace(sm.str(i), ',', ' ') << ' ';
+			}
+			else
+			{
+				str_stream << sm[i] << ' ';
+			}
 		}
-		str_stream << '\n';
-		Logger::trace(str_stream.str());
+		std::string token{};
+		while (str_stream >> token)
+		{
+			//For each pokemon do:
+			//First pokemon is the prevolution
+			Logger::trace(token);
+		}
 		return true;
 	}
 	return false;

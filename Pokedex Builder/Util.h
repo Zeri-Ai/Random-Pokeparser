@@ -13,10 +13,13 @@ namespace constants
 		fatal,
 		off
 	};
-	constexpr bool debug_mode{ true };
 	constexpr char default_log_name[] { "logfile" };
 	constexpr char default_extension[]{ ".log" };
 	static constexpr int byte_order_mark_size{ 3 };
+}
+namespace utilities
+{
+	std::string replace(const std::string& str, const char old_text, const char new_text);
 }
 class Logger
 {
