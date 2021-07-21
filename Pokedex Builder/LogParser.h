@@ -12,6 +12,7 @@ public:
 	};
 	static const std::regex pokemon_evolution;
 	static const std::string type_pokemon_evolution;
+	static const std::string type_pokemon_movesets_metronome;
 private:
 	StringType m_current_string_type;
 	bool current_type_parsable(const std::string& line);

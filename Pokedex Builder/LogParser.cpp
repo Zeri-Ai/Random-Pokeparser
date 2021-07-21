@@ -3,8 +3,8 @@
 #include "LogParser.h"
 #include "Util.h"
 const std::regex Parser::pokemon_evolution{ R"((.+?) now evolves into ((?:.+?, )*)(?:(.+?)? and )?(.+?)$)" };
-//const std::regex Parser::pokemon_evolution{ R"((.+?) now evolves into (?:(.+?), )*(?:(.+?)? and )?(.+?)$)" };
 const std::string Parser::type_pokemon_evolution{ "--Randomized Evolutions--" };
+const std::string Parser::type_pokemon_movesets_metronome{ "Pokemon Movesets: Metronome Only" };
 Parser::Parser(StringType current_string_type): m_current_string_type{current_string_type}
 {
 }
