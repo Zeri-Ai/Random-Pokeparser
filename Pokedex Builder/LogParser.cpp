@@ -43,6 +43,7 @@ bool Parser::current_type_parsable(const std::string& line)
 		}
 		return true;
 	}
+	
 	return false;
 }
 bool Parser::parse_type(const std::string& line)
@@ -52,6 +53,10 @@ bool Parser::parse_type(const std::string& line)
 		Logger::trace("Type parsed as Pokemon Evolution.");
 		m_current_string_type = StringType::randomized_evolutions;
 		return true;
+	}
+	if (line == type_pokemon_movesets_metronome)
+	{
+		Logger::trace("Line parsed as Pokemon Movesets: Metronome.");
 	}
 	Logger::trace("No type could be parsed.");
 	return false;
