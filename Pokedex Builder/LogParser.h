@@ -8,11 +8,15 @@ public:
 	enum class StringType
 	{
 		none,
-		randomized_evolutions
+		randomized_evolution,
+		moveset
 	};
 	static const std::regex pokemon_evolution;
 	static const std::string type_pokemon_evolution;
-	static const std::string type_pokemon_movesets_metronome;
+	static const std::string type_pokemon_moveset_metronome;
+	static const std::string type_pokemon_moveset;
+	static const std::regex pokemon_moveset;
+	static const std::string type_pokemon_tm_move;
 private:
 	StringType m_current_string_type;
 	bool current_type_parsable(const std::string& line);
